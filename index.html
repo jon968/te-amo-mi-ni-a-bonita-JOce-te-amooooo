@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Para Mi Niña Hermosa</title>
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body {
+            background: linear-gradient(135deg, #ffe5ec, #ffc2d1);
+            font-family: 'Segoe UI', sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+            overflow-x: hidden;
+            position: relative;
+        }
+        .container {
+            background: rgba(255, 255, 255, 0.9);
+            padding: 30px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            max-width: 450px;
+            width: 100%;
+            margin-top: 20px;
+            z-index: 10;
+            border: 2px solid #ff85a1;
+        }
+        h1 { color: #ff477e; font-size: 2rem; margin-bottom: 15px; }
+        .heart { font-size: 50px; color: #ff477e; animation: beat 1.2s infinite; margin: 15px 0; }
+        @keyframes beat { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.15); } }
+        p { color: #4a4a4a; font-size: 1.1rem; line-height: 1.6; margin-bottom: 20px; }
+        
+        /* Reproductor de música */
+        .audio-player {
+            background: #fff;
+            border: 1px solid #ffc2d1;
+            padding: 12px;
+            border-radius: 50px;
+            margin: 15px 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            cursor: pointer;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+            transition: all 0.3s ease;
+        }
+        .audio-player:hover { transform: scale(1.03); }
+        .play-btn { background: #ff477e; color: white; border: none; width: 40px; height: 40px; border-radius: 50%; font-size: 1rem; display: flex; align-items: center; justify-content: center; cursor: pointer; }
+        .song-info { text-align: left; font-size: 0.9rem; color: #ff477e; font-weight: bold; }
+        .song-info span { color: #777; font-weight: normal; display: block; font-size: 0.8rem; }
+
+        /* Contador */
+        .counter-title { font-weight: bold; color: #ff7096; margin-top: 25px; font-size: 1.2rem; }
+        .counter {
+            background: #ff85a1;
+            color: white;
+            padding: 15px;
+            border-radius: 12px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            margin-top: 10px;
+            box-shadow: 0 4px 10px rgba(255, 133, 161, 0.4);
+        }
+
+        /* Sección del Examen */
+        .exam-box {
+            background: #fff0f5;
+            border-left: 5px solid #ff477e;
+            padding: 15px;
+            border-radius: 8px;
+            margin-top: 25px;
+            text-align: left;
+        }
+        .exam-title {
+            font-weight: bold;
+            color: #ff477e;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            font-size: 1.1rem;
+        }
+
+        .floating-heart {
+            position: absolute; color: rgba(255, 71, 126, 0.2); font-size: 24px;
+            animation: float 6s linear infinite; bottom: -50px; z-index: 1;
+        }
+        @keyframes float {
+            0% { transform: translateY(0) rotate(0deg); opacity: 1; }
+            100% { transform: translateY(-100vh) rotate(360deg); opacity: 0; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <div class="heart">❤️</div>
+        <h1>Para mi niña hermosa</h1>
+        
+        <div class="audio-player" id="playerButton">
+            <button class="play-btn" id="playIcon">▶</button>
+            <div class="song-info">
+                Nuestra Canción
+                <span>Jorge Cuellar x Conjunto Rienda Real</span>
+            </div>
+        </div>
+        
+        <audio id="bgMusic" loop>
+            <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3" type="audio/mpeg">
+        </audio>
+
+        <p>Quería hacerte este detalle para recordarte lo mucho que te amo y lo importante que eres para mí. Eres una niña increíble, inteligente, hermosa y me haces el hombre más feliz del mundo cada día. Gracias por cruzarte en mi camino y por compartir tu vida conmigo. ✨</p>
+        
+        <div class="counter-title">Tiempo desde que nos conocimos:</div>
+        <div class="counter" id="clock">Cargando tiempo...</div>
+
+        <div class="exam-box">
+            <div class="exam-title">✨ Mensaje para ti:</div>
+            <p style="font-size: 1rem; color: #4a4a4a; margin-bottom: 0; line-height: 1.6; font-style: italic;">
+                Mi niñita hermosa, se que más alrato tienes un examen y solo quiero que sepas que confío en ti mi niña, se que tú puedes con eso y más, eres super inteligente y capas de hacer y de lograr todo lo que tú quieras mi princesita. Te amo mi niña, no lo olvides, nunca dudes de ti y de lo que puedes lograr. Suerte✨
+            </p>
+        </div>
+    </div>
+
+    <script>
+        // Lógica de reproducción
+        const music = document.getElementById('bgMusic');
+        const playerBtn = document.getElementById('playerButton');
+        const playIcon = document.getElementById('playIcon');
+
+        playerBtn.addEventListener('click', () => {
+            if (music.paused) {
+                music.play();
+                playIcon.innerText = '⏸';
+                playerBtn.style.background = '#ffe5ec';
+            } else {
+                music.pause();
+                playIcon.innerText = '▶';
+                playerBtn.style.background = '#fff';
+            }
+        });
+
+        // Corazones flotantes
+        function createHeart() {
+            const heart = document.createElement('div');
+            heart.classList.add('floating-heart');
+            heart.innerText = '❤️';
+            heart.style.left = Math.random() * 100 + 'vw';
+            heart.style.animationDuration = Math.random() * 3 + 4 + 's';
+            document.body.appendChild(heart);
+            setTimeout(() => { heart.remove(); }, 7000);
+        }
+        setInterval(createHeart, 400);
+
+        // Cuenta exacta: 7 de Julio de 2025 (Madrugada 3:30 AM)
+        const startDate = new Date('2025-07-07T03:30:00');
+        function updateCounter() {
+            const now = new Date();
+            const diff = now - startDate;
+            
+            const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+            
+            document.getElementById('clock').innerHTML = 
+                `${days} días, ${hours}h ${minutes}m ${seconds}s`;
+        }
+        setInterval(updateCounter, 1000); 
+        updateCounter();
+    </script>
+</body>
+</html>
