@@ -1,2 +1,2 @@
-# te-amo-mi-ni-a-bonita-JOce-te-amooooo
+# te-amo-mi-ni-a-bonita-Joce-te-amooooo
 mi niña emocha
